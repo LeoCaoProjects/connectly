@@ -1,80 +1,96 @@
-# Connectly 
-> A modern, full-stack social networking web application. Featuring real-time direct communication, intelligent matching algorithm, and analytics to help track your interactions over time - all in one seamless experience. Built as a COMP602 Semester Project at AUT.
+# Connectly
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20App-brightgreen?style=for-the-badge&logo=vercel)](https://connectly-pink-six.vercel.app/)
-[![Java](https://img.shields.io/badge/Java-17%2B-orange?style=for-the-badge&logo=openjdk)](https://www.oracle.com/java/)
-[![React](https://img.shields.io/badge/React-18%2B-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+A networking app we built as a team for software development practice (COMP602) at AUT. Find people with shared interests, connect, and keep the conversation going through messages and voice or video calls.
 
----
-## Screenshots
+<br>
 
-| | | |
-| :---: | :---: | :---: |
-| ![Screenshot 1](https://github.com/fatehbhular/Connectly/blob/main/IMG_8724.PNG?raw=true) | ![Screenshot 2](https://github.com/fatehbhular/Connectly/blob/main/IMG_8722.PNG?raw=true) | ![Screenshot 3](https://github.com/fatehbhular/Connectly/blob/main/IMG_8723.PNG?raw=true) |
+<p align="center">
+  <img src="docs/screenshots/overview.png" width="960" alt="Connectly: AI portfolio suggestions, profile discovery, and direct and group messaging">
+</p>
 
----
+<br>
 
-## Tech Stack
-
-Connectly is architected using a decoupled client-server model, utilizing modern cloud infrastructure for continuous deployment.
-
-### Core Architecture
-* **Frontend:** `React` (v18+) powered by `Vite` for ultra-fast bundling and HMR.
-* **Backend:** `Spring Boot` (Java 17) implementing a RESTful API architecture.
-* **Database:** `Supabase` hosting a managed cloud `PostgreSQL` instance.
-
-### Cloud Infrastructure & DevOps
-* **Frontend Hosting:** `Vercel` (Automated CI/CD pipelines via GitHub integration).
-* **Backend Hosting:** `Railway` (Containerized production deployment environment).
-* **Version Control:** `GitHub` (Structured feature-branch workflow).
-
----
+We worked in two scrum sprints, using Trello for user stories, priorities, sprint backlogs and acceptance checks. Planning poker helped us estimate work, while standups and retrospectives kept us coordinated. We planned the design with UI mockups and UML diagrams, tracked testing against a shared definition of done, and brought our work together through git branches and pull requests.
 
 ## Features
 
-* **Secure Authentication** – User profiles and onboarding configurations.
-* **Real-Time Context** – Instantaneous direct messaging corridors between users.
-* **Chat Hub** – Centralized conversation history with a dedicated DM inbox list.
-* **Voice + Video Calling** - Peer-to-peer voice and video calls between users.
-* **Secure Database Hashing** - Passwords and sensitive data protected with industry standard hashing.
-* **Profile Analytics** – Insights and activity tracking on user profiles.
-* **Matching Algorithm** – Smart user matching based on shared interests and connections.
-* **Robust REST API** – Modular, scalable Spring Boot endpoints handling messaging payloads.
+- Login, onboarding and two factor verification.
+- Custom matching algorithm with swipe discovery and filters.
+- Direct and group messaging, voice and video calls.
+- AI suggestions for skills and projects.
+- Profile analytics and connection statistics.
+- Installable web app with PWA support.
 
----
+## Running locally
 
-## 📂 Project Structure
+You'll need java 21, Node.js 22 and Docker.
 
-```text
-connectly/
-├── frontend/          # React + Vite Client Application
-│   ├── src/
-│   │   ├── components/   # Reusable UI elements (Buttons, Chat Bubbles, Sidebars)
-│   │   ├── pages/        # View Containers (Login, Dashboard, Chat)
-│   │   └── assets/       # Static media assets and styling configurations
-│   └── package.json
-│
-└── backend/           # Spring Boot REST API
-    ├── src/main/java/
-    │   └── com/connectly/
-    │       ├── controller/ # REST API Request Endpoints
-    │       ├── service/    # Business Logic Layer
-    │       ├── repository/ # Spring Data JPA Database Queries
-    │       └── model/      # Data Entities & POJOs
-    └── build.gradle
+Copy `.env.example` to `.env`, `backend/.env.example` to `backend/.env`, and `frontend/.env.example` to `frontend/.env.local`. These defaults use a local database; use your own credentials for any external services.
+
+Start the database from the repository root:
+
+```sh
+docker compose up -d
 ```
 
----
+Start the backend:
 
-## Team Members
+```sh
+cd backend
+./gradlew bootRun
+```
 
-* **Fateh Bhular** - Product Owner / Fullstack Developer / UI Designer ([GitHub](https://github.com/fatehbhular))
-* **Shawn Lee** - Scrum Master / Fullstack Developer ([GitHub](https://github.com/ShawnLeeyz))
-* **Leo Cao** - Fullstack Developer / UI Designer ([GitHub](https://github.com/LeoCaoProjects))
-* **Srikar Kurani** - Fullstack Developer ([GitHub](https://github.com/SrikarKurani))
+On Windows, use `./gradlew.bat bootRun`. In another terminal, start the frontend:
 
----
+```sh
+cd frontend
+npm ci
+npm run dev
+```
 
-## License
+Open `http://localhost:5173`. Email verification needs SendGrid configured for the sender in `OtpService.java`; portfolio suggestions need a Groq key. Both keys belong in `backend/.env`.
 
-This software is developed strictly for educational use case evaluations as an undergraduate group assignment for **COMP602** at the **Auckland University of Technology (AUT)**.
+## Contributors
+
+<table>
+  <tr>
+    <td align="center" width="100">
+      <a href="https://github.com/fatehbhular"><img src="https://github.com/fatehbhular.png?size=160" width="56" height="56" alt="Fateh Bhular"></a>
+    </td>
+    <td width="210">
+      <a href="https://github.com/fatehbhular"><strong>Fateh Bhular</strong></a><br>
+      <sub>Product owner</sub>
+    </td>
+    <td width="690">Direct messaging, voice &amp; video calls<br>App setup, online status &amp; UI theme</td>
+  </tr>
+  <tr>
+    <td align="center" width="100">
+      <a href="https://github.com/ShawnLeeyz"><img src="https://github.com/ShawnLeeyz.png?size=160" width="56" height="56" alt="Shawn Lee"></a>
+    </td>
+    <td width="210">
+      <a href="https://github.com/ShawnLeeyz"><strong>Shawn Lee</strong></a><br>
+      <sub>Scrum master</sub>
+    </td>
+    <td width="690">Email OTP, two factor verification &amp; password recovery<br>Password hashing &amp; swipe controls</td>
+  </tr>
+  <tr>
+    <td align="center" width="100">
+      <a href="https://github.com/LeoCaoProjects"><img src="https://github.com/LeoCaoProjects.png?size=160" width="56" height="56" alt="Leo Cao"></a>
+    </td>
+    <td width="210">
+      <a href="https://github.com/LeoCaoProjects"><strong>Leo Cao</strong></a><br>
+      <sub>Developer</sub>
+    </td>
+    <td width="690">Login &amp; accounts, matching algorithm &amp; group chats<br>AI suggestions, PWA support &amp; UI design</td>
+  </tr>
+  <tr>
+    <td align="center" width="100">
+      <a href="https://github.com/SrikarKurani"><img src="https://github.com/SrikarKurani.png?size=160" width="56" height="56" alt="Srikar Kurani"></a>
+    </td>
+    <td width="210">
+      <a href="https://github.com/SrikarKurani"><strong>Srikar Kurani</strong></a><br>
+      <sub>Developer</sub>
+    </td>
+    <td width="690">Profile editing &amp; discovery filters<br>Analytics &amp; user blocking</td>
+  </tr>
+</table>

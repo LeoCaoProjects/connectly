@@ -5,3 +5,7 @@ build/
 .idea/
 target/
 .vscode/
+# Local configuration
+.env
+.env.*
+!.env.example
